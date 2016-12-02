@@ -1,0 +1,110 @@
+@import './colors.styl';
+
+nav.details {
+
+    & ul {
+        display: flex;
+        flex-direction: row;
+
+        & li.cancel {
+            order: 0;
+            margin-left: 15px;
+
+            & > a {
+                padding: 15px;
+            }
+        }
+
+        & li.title {
+            order: 1;
+            flex-grow: 1;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        & li.done {
+            order: 2;
+            margin-right: 15px;
+
+            &.disabled {
+                color: darkgray;
+            }
+
+            & > a {
+                padding: 15px;
+            }
+        }
+    }
+
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+
+    & div.dateField {
+        margin-right: 5px;
+    }
+
+    & div.timeField {
+        margin-left: 5px;
+    }
+}
+
+.rowSpace {
+    padding-top: 15px;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+main.bookingForm {
+
+    & form {
+
+        div.input {
+            display: flex;
+            flex-direction: column;
+
+            & input.error {
+                border-left: 1px solid inputError;
+                border-right: 1px solid inputError;
+                border-top: 1px solid inputError;
+                border-radius: 2px 2px 0 0;
+                margin-bottom: 0;
+            }
+
+            & div.error {
+                background-color: inputErrorLight;
+                color: inputError;
+                padding: 9px;
+                border-left: 1px solid inputError;
+                border-right: 1px solid inputError;
+                border-bottom: 1px solid inputError;
+                border-top: 0;
+                margin-bottom: spaceBelow;
+                border-radius: 0 0 2px 2px;
+            }
+        }
+
+        max-width: 800px;
+        margin: 0 auto;
+
+        & input[type=text] {
+            border:0;
+            box-shadow: inset 0 0 0 1px inputBorder;
+            &:focus {
+                outline: none;
+                box-shadow: inset 0 0 0 1px inputHighlight, 0 0 3px transparentify(inputHighlight, inputHighlight, 0.5);
+
+                &.error {
+                    border: 0;
+                }
+            }
+        }
+    }
+}
