@@ -41,13 +41,14 @@ class App extends Component {
         return (
             <Provider stores={this.props.stores}>
                 <Router history={history}>
-                    <Route path="/" >
-                        <IndexRoute component={Home} />
-                        <Route path="/bookings" component={Add}/>
+
+                        <Route path="/"  component={Home} />
+
+                        <Route path="/bookings" component={Add} />
                         <Route path="/bookings/:bookingId" component={Show} />
                         <Route path="/bookings/:bookingId/edit" component={Edit} />
                         <Route path="*" component={NoMatch}/>
-                    </Route>
+
                 </Router>
             </Provider>
         );
@@ -55,3 +56,6 @@ class App extends Component {
 };
 
 export default App;
+// <Route path="/" >
+//  <IndexRoute component={Home} />
+//       </Route>

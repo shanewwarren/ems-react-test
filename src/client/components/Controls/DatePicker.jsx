@@ -50,7 +50,8 @@ class DatePicker extends Component {
                 errorMessage, name, className } = this.props;
 
 
-        const inputStyles = classNames(className);
+        const inputStyles = classNames('datepicker', className);
+
 
         // TODO figure out how to apply it to the date picker.
         const inputClass = classNames({ 'error': errorMessage });
@@ -80,9 +81,10 @@ class DatePicker extends Component {
         return (
 
             <MuiTheme>
-                <div className={inputStyles}>
+                <div>
                     <label htmlFor={label}>{placeholder}</label>
                     <MuiDatePicker textFieldStyle={textFieldStyle}
+                                className='datepicker'
                                 dialogContainerStyle={dialogContainerStyle}
                                 hintStyle={hintStyle}
                                 formatDate={formatDate}
@@ -92,6 +94,15 @@ class DatePicker extends Component {
                                 value={value}
                                 onChange={this._onChange}
                                 hintText={placeholder} />
+
+                    <div className='mobile'>
+                        <input type='date'
+                            placeholder={placeholder}
+                            value={value}
+                            onChange={this._onChange}
+                            min="0001-01-01"
+                            max="9999-12-31" />
+                    </div>
 
                     { this.renderError(errorMessage) }
                 </div>

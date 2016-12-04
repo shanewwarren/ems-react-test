@@ -47,7 +47,7 @@ class TimePicker extends Component {
 
         const { readOnly, placeholder, value, errorMessage, name, className } = this.props;
 
-        const inputStyles = classNames(className);
+        const inputStyles = classNames('timepicker', className);
 
         // TODO figure out how to apply it to the date picker.
         const inputClass = classNames({ 'error': errorMessage });
@@ -79,9 +79,10 @@ class TimePicker extends Component {
         return (
 
             <MuiTheme>
-                <div className={inputStyles}>
+                <div>
                     <label htmlFor={label}>{placeholder}</label>
                     <MuiTimePicker
+                        className='timepicker'
                         textFieldStyle={textFieldStyle}
                         dialogStyle={dialogStyle}
                         hintStyle={hintStyle}
@@ -92,6 +93,15 @@ class TimePicker extends Component {
                         hintText={placeholder}
                         value={value}
                         onChange={this._onChange} />
+
+
+                    <div className='mobile'>
+                        <input type='time'
+                            placeholder={placeholder}
+                            value={value}
+                            onChange={this._onChange}  />
+                    </div>
+
 
                     { this.renderError(errorMessage) }
                 </div>

@@ -122,6 +122,10 @@ main.bookingForm {
 
     & form {
 
+        & .mobile {
+            display: none;
+        }
+
         div.input {
             display: flex;
             flex-direction: column;
@@ -162,5 +166,26 @@ main.bookingForm {
                 }
             }
         }
+    }
+}
+
+
+@media only screen and (max-width : 414px) {
+
+
+    main.bookingForm {
+
+        & form {
+
+            & .datepicker, & .timepicker {
+                display: none !important;
+            }
+
+            & .mobile {
+                display: block;
+            }
+
+        }
+
     }
 }

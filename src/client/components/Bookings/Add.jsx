@@ -9,14 +9,15 @@ class Add extends Component {
 
     constructor(props, context) {
         super(props, context);
+
     }
 
     render() {
 
-        const { stores }  = this.props;
+        const { stores, router }  = this.props;
 
         return (
-            <Form booking={stores.booking}/>
+            <Form booking={stores.booking} router={router}/>
         );
     }
 };

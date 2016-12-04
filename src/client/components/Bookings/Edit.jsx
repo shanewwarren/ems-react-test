@@ -13,11 +13,12 @@ class Edit extends Component {
 
     render() {
 
-        const { params, stores } = this.props;
+        const { params, stores, router } = this.props;
 
         return (
             <Form id={params.bookingId}
-                  booking={stores.booking} />
+                  booking={stores.booking}
+                  router={router} />
         );
     }
 };

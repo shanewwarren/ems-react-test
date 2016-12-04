@@ -88,7 +88,7 @@ class Form extends Component {
 
     onSubmit(form) {
 
-        const { booking, id } = this.props;
+        const { booking, id, router } = this.props;
 
         if (!this.form.state.valid) {
             return
@@ -119,7 +119,7 @@ class Form extends Component {
         return promise.then(() => {
 
             const link = this.getCancelLink();
-            return browserHistory.push(link);
+            return router.push(link);
         })
 
     }
@@ -134,6 +134,8 @@ class Form extends Component {
     render() {
 
         const { id } = this.props;
+        const cancelLink =  this.getCancelLink();
+
 
         const submitClasses = classNames('done', {
             'disabled': !this.form.state.valid
@@ -148,7 +150,7 @@ class Form extends Component {
                 <div>
                     <nav className='details'>
                         <ul>
-                            <li className='cancel'><Link className='header-link' to={this.getCancelLink()}>Cancel</Link></li>
+                            <li className='cancel'><Link className='header-link' to={cancelLink}>Cancel</Link></li>
                             <li className={submitClasses} onClick={this.form.submit}><a>Done</a></li>
                             <li className='title'>{ id ? 'Update Booking' : 'Create Booking'}</li>
                         </ul>
