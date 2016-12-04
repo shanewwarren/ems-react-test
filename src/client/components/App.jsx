@@ -17,7 +17,7 @@ let history = browserHistory;
 if (process && process.env && process.env.NODE_ENV === 'production') {
     console.log('production')
     history = useRouterHistory(createHistory)({
-        basename: '/base-path'
+        basename: '/ems-react-test'
     });
 }
 
