@@ -11,14 +11,17 @@ _.merge(config, {
     cache: false,
     target: 'web',
     devtool: 'source-map',
-    entry: {
-        bundle: ['babel-polyfill', './src/client/index']
-    },
     output: {
         publicPath: 'http://localhost:3000/build/',
         libraryTarget: 'var'
     }
 });
+
+
+config.entry = {
+    bundle: ['./src/client/index']
+};
+
 
 // Add the loader for css extract
 config.module.loaders.push({
