@@ -20,10 +20,6 @@ _.merge(config, {
     }
 });
 
-console.info('Running production build...');
-
-// config.module.loaders[0].query.presets.splice(0,1);
-
 // Add the loader for css extract
 config.module.loaders.push({
     test: /\.styl$/,
@@ -32,8 +28,6 @@ config.module.loaders.push({
     exclude: /\.git$/
 });
 
-// delete config.output.libraryTarget;
-// delete config.output.pathinfo;
 
 // Save files to disk
 //-------------------------------

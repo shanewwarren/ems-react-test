@@ -33,6 +33,7 @@
     "escape-string-regexp": "^1.0.5",
     "event-emitter": "^0.3.4",
     "extract-text-webpack-plugin": "^1.0.1",
+    "history": "^4.4.1",
     "inflected": "^1.1.7",
     "joi-browser": "^9.1.0",
     "lodash": "^4.17.2",
