@@ -81,12 +81,6 @@ class TimePicker extends Component {
             color: 'darkgray'
         };
 
-        const dialogStyle = {
-            paddingTop: '0',
-             top: '-5%'
-        }
-
-
         const mobileValue = Moment(value, 'HH:mm').format('HH:mm');
 
 
@@ -98,7 +92,6 @@ class TimePicker extends Component {
                     <MuiTimePicker
                         className='timepicker'
                         textFieldStyle={textFieldStyle}
-                        dialogStyle={dialogStyle}
                         hintStyle={hintStyle}
                         inputStyle={inputStyle}
                         underlineShow={false}
