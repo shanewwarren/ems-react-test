@@ -9,7 +9,8 @@ Try the application now! [DEMO](https://shanewwarren.github.io/ems-react-test/)
 2. `cd ems-react-test`
 3. `npm install`
 4. `npm start`
-5. And you're off!
+5. Open your browser to `http://localhost:3000`
+6. And you're off!
 
 ## Additional features
 
