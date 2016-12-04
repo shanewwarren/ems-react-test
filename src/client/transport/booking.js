@@ -45,9 +45,9 @@ export function updateBooking(item) {
 
 };
 
-export function deleteBooking(item) {
+export function deleteBooking(id) {
 
-    const key = internals.getKey(item.id);
+    const key = internals.getKey(id);
     return Store.remove(key);
 
 };

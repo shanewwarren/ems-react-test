@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import {observable} from 'mobx';
 import classNames from 'classnames';
 import MuiTheme from './MuiTheme';
-
+import Moment from 'moment';
 const MuiDatePicker = require('material-ui/DatePicker').default;
 
 @observer
@@ -25,7 +25,13 @@ class DatePicker extends Component {
         this._onChange = this.onChange.bind(this);
     }
 
-    onChange(event, date) {
+    onChange(event, data) {
+
+        let date = data;
+        if (event && event.target && event.target.value) {
+            // mobile fallback
+            date = Moment(event.target.value, 'YYYY-MM-DD').toDate();
+        }
 
         if (this.props.onChange) {
             this.props.onChange(date);
@@ -78,6 +84,15 @@ class DatePicker extends Component {
         const dialogContainerStyle = {
             top: '-10%'
         }
+
+
+        let mobileValue = '';
+        console.log(value);
+        if (value !== 'Invalid date') {
+            mobileValue = Moment(value).format('YYYY-MM-DD');
+        }
+
+        console.log(value, mobileValue);
         return (
 
             <MuiTheme>
@@ -98,7 +113,7 @@ class DatePicker extends Component {
                     <div className='mobile'>
                         <input type='date'
                             placeholder={placeholder}
-                            value={value}
+                            value={mobileValue}
                             onChange={this._onChange}
                             min="0001-01-01"
                             max="9999-12-31" />

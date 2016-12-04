@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import {observable} from 'mobx';
 import classNames from 'classnames';
 import MuiTheme from './MuiTheme';
-
+import Moment from 'moment';
 const MuiTimePicker = require('material-ui/TimePicker').default;
 
 @observer
@@ -24,7 +24,15 @@ class TimePicker extends Component {
         this._onChange = this.onChange.bind(this);
     }
 
-    onChange(event, time) {
+    onChange(event, data) {
+
+
+        let time = data;
+        if (event && event.target && event.target.value) {
+            // mobile fallback
+            console.log(event.target.value);
+            time = Moment(event.target.value, 'HH:mm').toDate();
+        }
 
         if (this.props.onChange) {
             this.props.onChange(time);
@@ -42,6 +50,8 @@ class TimePicker extends Component {
             </div>
         );
     }
+
+
 
     render() {
 
@@ -76,6 +86,10 @@ class TimePicker extends Component {
              top: '-5%'
         }
 
+
+        const mobileValue = Moment(value, 'HH:mm').format('HH:mm');
+
+
         return (
 
             <MuiTheme>
@@ -98,7 +112,7 @@ class TimePicker extends Component {
                     <div className='mobile'>
                         <input type='time'
                             placeholder={placeholder}
-                            value={value}
+                            value={mobileValue}
                             onChange={this._onChange}  />
                     </div>
 

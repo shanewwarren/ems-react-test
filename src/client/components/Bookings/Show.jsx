@@ -13,6 +13,17 @@ class Show extends Component {
         this.state = {
             loaded: false
         };
+
+        this._onClick = this.onClick.bind(this);
+    }
+
+    onClick() {
+
+        const { stores, router } = this.props;
+        const booking = stores.booking;
+
+        booking.deleteBooking(booking.currentBooking.id);
+        router.push('/');
     }
 
     componentDidMount() {
@@ -49,6 +60,8 @@ class Show extends Component {
                         <h1>{current.eventName}</h1>
                         <p className='secondary'>{current.roomName}</p>
                         <div>{current.startFormat} - {current.endFormat} ({current.durationFormat})</div>
+
+                        <button  onClick={this._onClick} className='delete'>Delete</button>
                     </main>
                 </div>
         );

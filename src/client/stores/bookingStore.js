@@ -127,6 +127,18 @@ export default class BookingStore {
 
         payload.id = id;
         const json = this.transportLayer.updateBooking(payload);
+        this.updateFromServer([json]);
+    }
+
+
+    deleteBooking(id) {
+
+        this.transportLayer.deleteBooking(id);
+
+        const index = _.findIndex(this.bookings, { id });
+        if (index > -1) {
+            this.bookings.splice(index, 1);
+        }
     }
 
     getBookings() {
