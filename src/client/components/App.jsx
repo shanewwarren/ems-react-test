@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { observer, Provider } from 'mobx-react';
+import { isProduction } from '../utils/environment';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // Needed for onTouchTap
@@ -12,14 +13,15 @@ injectTapEventPlugin();
 import { Router, Route, Link, useRouterHistory, browserHistory, IndexRoute } from 'react-router';
 import { createHistory } from 'history';
 
-let history = browserHistory;
 
-if (process && process.env && process.env.NODE_ENV === 'production') {
-    console.log('production')
-    history = useRouterHistory(createHistory)({
-        basename: '/ems-react-test'
-    });
+let basename = '/';
+if (isProduction()) {
+    basename = '/ems-react-test';
 }
+
+let history = useRouterHistory(createHistory)({
+    basename: basename
+});
 
 import Home from './Home';
 import NoMatch from './NoMatch';
@@ -36,9 +38,7 @@ class App extends Component {
 
     render() {
 
-        console.log(this.props);
         return (
-
             <Provider stores={this.props.stores}>
                 <Router history={history}>
                     <Route path="/" >
@@ -50,8 +50,6 @@ class App extends Component {
                     </Route>
                 </Router>
             </Provider>
-
-
         );
     }
 };

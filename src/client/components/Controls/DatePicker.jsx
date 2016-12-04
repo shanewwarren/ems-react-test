@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import MuiTheme from './MuiTheme';
 
 const MuiDatePicker = require('material-ui/DatePicker').default;
-console.log('@', MuiDatePicker);
 
 @observer
 class DatePicker extends Component {
