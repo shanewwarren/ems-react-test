@@ -87,12 +87,11 @@ class DatePicker extends Component {
 
 
         let mobileValue = '';
-        console.log(value);
-        if (value !== 'Invalid date') {
+
+        if (value instanceof Date) {
             mobileValue = Moment(value).format('YYYY-MM-DD');
         }
 
-        console.log(value, mobileValue);
         return (
 
             <MuiTheme>

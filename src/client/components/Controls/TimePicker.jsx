@@ -81,8 +81,7 @@ class TimePicker extends Component {
             color: 'darkgray'
         };
 
-        const mobileValue = Moment(value, 'HH:mm').format('HH:mm');
-
+        let mobileValue = Moment(value, 'HH:mm').format('HH:mm');
 
         return (
 
