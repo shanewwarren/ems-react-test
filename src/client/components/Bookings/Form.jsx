@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'mobx-connect';
 import {observable} from 'mobx';
+import { observer, inject } from 'mobx-react';
 
 import classNames from 'classnames';
 import Moment from 'moment';
@@ -17,7 +17,7 @@ import { browserHistory } from 'react-router';
 
 const FormHelper = require('../../utils/Form').default;
 
-@connect
+@observer
 class Form extends Component {
 
     static propTypes: {

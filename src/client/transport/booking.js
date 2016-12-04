@@ -25,20 +25,30 @@ export function getBookings() {
     return items;
 };
 
-export function getBooking(id) {
-
+export function parseId(id) {
 
     let actualId = parseInt(id);
     if (!Number.isInteger(actualId)) {
         actualId = id;
     }
 
-    const key = internals.getKey(id);
+    return actualId;
+}
+
+export function getBooking(id) {
+
+
+    let actualId = parseId(id);
+
+    const key = internals.getKey(actualId);
     return Store.get(key);
 
 };
 
 export function updateBooking(item) {
+
+    item.id = parseId(item.id);
+
 
     const key = internals.getKey(item.id);
     return Store.set(key, item);
@@ -47,7 +57,9 @@ export function updateBooking(item) {
 
 export function deleteBooking(id) {
 
-    const key = internals.getKey(id);
+    let actualId = parseId(id);
+
+    const key = internals.getKey(actualId);
     return Store.remove(key);
 
 };

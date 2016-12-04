@@ -12,9 +12,9 @@ class BookingDate extends Component {
 
         let items = <div className='noBookings'>You have no bookings for these dates.</div>;
         if (bookings.length > 0) {
-            items = bookings.map((booking) => {
+            items = bookings.map((booking, index) => {
                 return (
-                    <BookingItem key={`booking-${booking.id}`} router={router}
+                    <BookingItem key={`booking-${booking.id}-${index}`} router={router}
                         booking={booking} />
                 )
             })
