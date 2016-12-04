@@ -17,7 +17,7 @@ _.merge(config, {
     }
 });
 
-
+config.plugins = [];
 config.entry = {
     bundle: ['./src/client/index']
 };
@@ -30,15 +30,6 @@ config.module.loaders.push({
     include: path.join(sources, 'assets/css'),
     exclude: /\.git$/
 });
-
-
-// Save files to disk
-//-------------------------------
-//config.output.path = path.join(__dirname, '../build')
-
-if (!config.plugins) {
-    config.plugins = [];
-}
 
 
 config.plugins.push(
