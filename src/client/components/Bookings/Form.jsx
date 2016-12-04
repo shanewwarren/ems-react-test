@@ -128,7 +128,7 @@ class Form extends Component {
 
         const { id } = this.props;
 
-        return id ? `/bookings/${id}` : '/';
+        return id ? `/bookings/${id}/` : '/';
     }
 
     render() {
@@ -144,7 +144,6 @@ class Form extends Component {
             errorFlash =  <Flash status="error" message={this.form.state.formError} />;
         }
 
-        console.log('render');
         return (
                 <div>
                     <nav className='details'>

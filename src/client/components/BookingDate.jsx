@@ -8,13 +8,13 @@ class BookingDate extends Component {
 
     render() {
 
-        const { display, bookings } = this.props;
+        const { display, bookings, router } = this.props;
 
         let items = <div className='noBookings'>You have no bookings for these dates.</div>;
         if (bookings.length > 0) {
             items = bookings.map((booking) => {
                 return (
-                    <BookingItem key={`booking-${booking.id}`}
+                    <BookingItem key={`booking-${booking.id}`} router={router}
                         booking={booking} />
                 )
             })

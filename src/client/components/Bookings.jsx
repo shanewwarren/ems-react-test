@@ -61,7 +61,8 @@ class Bookings extends Component {
                 const props = {
                     key: `section-${index}`,
                     display: section.display,
-                    bookings: section.bookings
+                    bookings: section.bookings,
+                    router: this.props.router
                 };
 
                 if (this.state.index === index) {

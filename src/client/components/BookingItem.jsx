@@ -8,19 +8,20 @@ class BookingItem extends Component {
         super();
 
 
+
         this._handleClick = this.handleClick.bind(this);
     }
 
     handleClick() {
 
-        const { booking } = this.props;
+        const { booking, router } = this.props;
 
-        browserHistory.push(`/bookings/${booking.id}`);
+        router.push(`/bookings/${booking.id}/`);
     }
 
 
     render() {
-
+        console.log(this.props, this.context);
         const { booking } = this.props;
         return (
             <div className='booking'  onTouchTap={this._handleClick} onClick={this._handleClick}>

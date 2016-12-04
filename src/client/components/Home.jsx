@@ -12,13 +12,15 @@ import Portal from './Portal';
 @inject('stores') @observer
 class Home extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
+
+        console.log(props, context);
     }
 
     render() {
 
-        const { stores } = this.props;
+        const { stores, router } = this.props;
         const { state } = stores;
 
         let calendar = null;
@@ -35,8 +37,9 @@ class Home extends Component {
                 <NavigationBar stores={stores} />
                 <div className='content'>
                     { calendar }
-                    <Bookings date={state.currentMoment}
-                              stores={stores} />
+                    <Bookings   router={router}
+                                date={state.currentMoment}
+                                stores={stores} />
 
                     <a onClick={state.setNow} className='link-button'>Now</a>
                 </div>
