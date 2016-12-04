@@ -8,23 +8,27 @@ import Moment from 'moment';
 
 BigCalendar.momentLocalizer(Moment);
 
+const SimpleHeader = React.createClass({
 
+    render() {
 
-let MyCustomHeader = React.createClass({
-  render(){
+        let { label } = this.props;
+        label = label[0];
 
-    let { label } = this.props
-    label = label[0];
-
-    return (
-        <div>{ label }</div>
-    )
-  }
-})
+        return (
+            <div>{ label }</div>
+        );
+    }
+});
 
 
 @observer
 class Calendar extends Component {
+
+    static propTypes = {
+        date: React.PropTypes.object,
+        changeDate: React.PropTypes.func
+    }
 
     constructor() {
         super();
@@ -56,9 +60,9 @@ class Calendar extends Component {
                 toolbar={false}
                 weekdayFormat={'dd'}
                 components={{
-                    day: {header: MyCustomHeader},
-                    week: {header: MyCustomHeader},
-                    month: {header: MyCustomHeader}
+                    day: {header: SimpleHeader},
+                    week: {header: SimpleHeader},
+                    month: {header: SimpleHeader}
                 }}
                 />
             </div>

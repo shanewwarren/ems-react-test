@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 import classNames from 'classnames';
 
 @observer
-class Calendar extends Component {
+class MonthSelect extends Component {
 
     static propTypes: {
         date: React.PropTypes.string.isRequired,
@@ -29,4 +29,4 @@ class Calendar extends Component {
     }
 };
 
-export default Calendar;
+export default MonthSelect;

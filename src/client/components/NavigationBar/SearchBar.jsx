@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import Calendar from './Calendar';
 
 @observer
 class SearchBar extends Component {
@@ -17,11 +16,9 @@ class SearchBar extends Component {
         this._onSearchChange = this.onSearchChange.bind(this);
     }
 
-
     onSearchChange(evt) {
 
         const { update } = this.props;
-
         update(evt.target.value);
     }
 

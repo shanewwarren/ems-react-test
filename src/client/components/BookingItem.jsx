@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import {observable} from 'mobx';
-import { browserHistory } from 'react-router';
 
 class BookingItem extends Component {
 
-    constructor() {
-        super();
-
-
+    constructor(props, context) {
+        super(props, context);
 
         this._handleClick = this.handleClick.bind(this);
     }
@@ -19,12 +15,13 @@ class BookingItem extends Component {
         router.push(`/bookings/${booking.id}/`);
     }
 
-
     render() {
-        console.log(this.props, this.context);
+
         const { booking } = this.props;
         return (
-            <div className='booking'  onTouchTap={this._handleClick} onClick={this._handleClick}>
+            <div className='booking'
+                 onTouchTap={this._handleClick}
+                 onClick={this._handleClick}>
                 <table>
                     <tbody>
                         <tr>

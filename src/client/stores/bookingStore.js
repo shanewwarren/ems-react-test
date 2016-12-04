@@ -1,32 +1,30 @@
-import { observable, computed, autorun, toJS } from 'mobx';
-import { Booking, Section } from '../models';
-
-import {
-    getBetweenDates,
-    startOfDay,
-    isSameDay,
-    isAfterDay,
-    sortDates
-} from '../utils/dateHelpers';
-
-import EscapeStringRegexp from 'escape-string-regexp';
+import { observable, computed } from 'mobx';
+import Moment from 'moment';
 import _ from 'lodash';
 import { flow, filter, groupBy, toPairs, concat, sortBy } from 'lodash/fp';
 const map = require('lodash/fp/map').convert({ 'cap': false });
 
-import Moment from 'moment';
+import EscapeStringRegexp from 'escape-string-regexp';
+import { getBetweenDates, startOfDay } from '../utils/dateHelpers';
+import { Booking, Section } from '../models';
 
+// Load the sample bookings for default
 const defaultBookings = require('../../../prototype/bookings.json');
 
 export default class BookingStore {
+
+    constructor(transportLayer) {
+
+        this.transportLayer = transportLayer;
+    }
 
     @observable currentBooking = null;
     @observable bookings = [];
     @observable filter = null;
 
+    // Computed value that is recalculated anytime the bookings
+    // array changes.
     @computed get sections() {
-
-
         let sections = flow([
 
             // Filter the bookings.
@@ -51,11 +49,9 @@ export default class BookingStore {
         if (!this.filter) {
 
             emptySections = flow([
-
+                // Generate a section for dates between bookings.
                 map(this._generateEmptySection),
-
                 filter((section) => section !== null)
-
             ])(sections);
         }
 
@@ -64,42 +60,6 @@ export default class BookingStore {
             sortBy((section) => section.start)
         ])(sections);
 
-    }
-
-
-    constructor(transportLayer) {
-
-        this.transportLayer = transportLayer;
-    }
-
-    _generateEmptySection(section, index, sections) {
-
-        if (!sections[index + 1]) {
-            return null;
-        }
-
-        const nextSection = sections[index + 1];
-        const between = getBetweenDates(section.start, nextSection.start);
-        if (!between) {
-            return null;
-        }
-
-        return new Section(between.start, between.end);
-    }
-
-    _filterBooking(booking, filter) {
-
-
-        if (!filter) {
-            return true;
-        }
-
-        const regex = new RegExp(EscapeStringRegexp(filter), 'i');
-
-        return (
-            (booking.eventName && booking.eventName.match(regex)) ||
-            (booking.roomName && booking.roomName.match(regex))
-        );
     }
 
     getBooking(id) {
@@ -175,8 +135,36 @@ export default class BookingStore {
             else {
                 found.updateFromJson(json);
             }
-
-
         });
+    }
+
+   _generateEmptySection(section, index, sections) {
+
+        if (!sections[index + 1]) {
+            return null;
+        }
+
+        const nextSection = sections[index + 1];
+        const between = getBetweenDates(section.start, nextSection.start);
+        if (!between) {
+            return null;
+        }
+
+        return new Section(between.start, between.end);
+    }
+
+    _filterBooking(booking, filter) {
+
+
+        if (!filter) {
+            return true;
+        }
+
+        const regex = new RegExp(EscapeStringRegexp(filter), 'i');
+
+        return (
+            (booking.eventName && booking.eventName.match(regex)) ||
+            (booking.roomName && booking.roomName.match(regex))
+        );
     }
 }

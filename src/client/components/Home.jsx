@@ -2,20 +2,12 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import NavigationBar from './NavigationBar/NavigationBar';
-import Calendar from './Calendar';
+import Calendar from './Controls/Calendar';
 import Bookings from './Bookings';
-import Portal from './Portal';
-// import Add from './Add';
 
 
 @inject('stores') @observer
 class Home extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-
-        console.log(props, context);
-    }
 
     render() {
 

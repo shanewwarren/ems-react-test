@@ -8,10 +8,8 @@ export default class StateStore {
 
     @observable searchToggle = false;
     @observable calendarToggle = false;
-    @observable addToggle = false;
 
     @observable currentMoment = Moment();
-
     @computed get currentDate() {
         return this.currentMoment.toDate();
     }
@@ -27,7 +25,6 @@ export default class StateStore {
 
         this.toggleCalendar = this._toggleCalendar.bind(this);
         this.toggleSearch = this._toggleSearch.bind(this);
-        this.toggleAdd = this._toggleAdd.bind(this);
 
         this.updateSearch = this._updateSearch.bind(this);
         this.setDate = this._setDate.bind(this);
@@ -61,12 +58,6 @@ export default class StateStore {
 
         this.calendarToggle = !this.calendarToggle;
     }
-
-    _toggleAdd() {
-
-        this.addToggle = !this.addToggle;
-    }
-
 
     _updateSearch(term) {
 

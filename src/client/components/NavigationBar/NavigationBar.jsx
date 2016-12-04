@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
-import Calendar from './Calendar';
+import MonthSelect from './MonthSelect';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router';
 
@@ -21,7 +21,7 @@ class NavigationBar extends Component {
                 <li className='search' onClick={state.toggleSearch}><span className='icon fa fa-search'></span></li>
                 <li className='add'><Link to="/bookings/"><span className='icon fa fa-plus'></span></Link></li>
                 <li className='calendar'>
-                    <Calendar onClick={state.toggleCalendar}
+                    <MonthSelect onClick={state.toggleCalendar}
                               date={state.currentDateFormat}
                               open={state.calendarToggle} />
                 </li>

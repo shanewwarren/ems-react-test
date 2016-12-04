@@ -25,10 +25,7 @@ class Bookings extends Component {
     componentWillReceiveProps(nextProps) {
 
         const { date, stores } = nextProps;
-
-        const index = stores.booking.sections.findIndex((section) => {
-            return section.isBetween(date)
-        });
+        const index = stores.booking.sections.findIndex((section) => section.isBetween(date));
 
         this.setState({
             index
@@ -37,11 +34,10 @@ class Bookings extends Component {
 
     componentDidUpdate(prevProps, prevState) {
 
+        // If the index was updated move the item into view.
         if (this.state.index >= 0 ) {
 
-            const rootNode = ReactDOM.findDOMNode(this);
             const domNode = ReactDOM.findDOMNode(this.activeSection);
-
             domNode.scrollIntoView({
                 block: "start",
                 behavior: "smooth"
@@ -65,6 +61,8 @@ class Bookings extends Component {
                     router: this.props.router
                 };
 
+                // Set the ref for the current active
+                // booking date section.
                 if (this.state.index === index) {
                     props.ref = (input) => { this.activeSection = input; };
                 }
