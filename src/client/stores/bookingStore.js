@@ -14,8 +14,6 @@ import _ from 'lodash';
 import { flow, filter, groupBy, toPairs, concat, sortBy } from 'lodash/fp';
 const map = require('lodash/fp/map').convert({ 'cap': false });
 
-
-
 import Moment from 'moment';
 
 const defaultBookings = require('../../../prototype/bookings.json');
@@ -103,22 +101,6 @@ export default class BookingStore {
             (booking.roomName && booking.roomName.match(regex))
         );
     }
-    // toJSON() {
-    //     return {
-    //         bookings: toJS(this.bookings)
-    //     };
-    // }
-
-    // fromJSON(json) {
-
-    //     if (json.apps) {
-    //         this.updateFromServer(json.apps);
-    //     }
-    // }
-
-    addBooking(payload) {
-        console.log(payload);
-    }
 
     getBooking(id) {
 
@@ -129,12 +111,22 @@ export default class BookingStore {
 
     createBooking(payload) {
 
-        console.log(payload);
+
+        const booking = new Booking();
+        booking.updateFromJson(payload);
+
+        const error = booking.isValid();
+        if (error) {
+            throw new Error(error);
+        }
+
+        this.transportLayer.updateBooking(booking);
     }
 
     updateBooking(id, payload) {
 
-        console.log(payload);
+        payload.id = id;
+        const json = this.transportLayer.updateBooking(payload);
     }
 
     getBookings() {

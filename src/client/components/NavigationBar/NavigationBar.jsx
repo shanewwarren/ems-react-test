@@ -19,7 +19,7 @@ class NavigationBar extends Component {
             <ul>
                 <li className='menu'><span className='icon fa fa-bars'></span></li>
                 <li className='search' onClick={state.toggleSearch}><span className='icon fa fa-search'></span></li>
-                <li className='add'  ><Link to="/bookings"><span className='icon fa fa-plus'></span></Link></li>
+                <li className='add'><Link to="/bookings"><span className='icon fa fa-plus'></span></Link></li>
                 <li className='calendar'>
                     <Calendar onClick={state.toggleCalendar}
                               date={state.currentDateFormat}

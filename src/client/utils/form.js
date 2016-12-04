@@ -89,6 +89,10 @@ class Form {
 
     _submit(evt) {
 
+        if (!this.state.valid) {
+            return;
+        }
+
         if (evt) {
             evt.preventDefault();
         }

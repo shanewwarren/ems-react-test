@@ -205,6 +205,10 @@ div.bookings {
             table {
                 width: 100%;
                 font-size: 0.9em;
+
+                & td:first-of-type {
+                    width: 125px;
+                }
             }
 
             &:last-of-type {
@@ -364,39 +368,6 @@ nav {
     }
 }
 
-nav.details {
-
-    & ul {
-        display: flex;
-        flex-direction: row;
-
-        & li.cancel {
-            order: 0;
-            margin-left: 15px;
-
-            & > a {
-                padding: 15px;
-            }
-        }
-
-        & li.title {
-            order: 1;
-            flex-grow: 1;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        & li.done {
-            order: 2;
-            margin-right: 15px;
-
-            & > a {
-                padding: 15px;
-            }
-        }
-    }
-
-}
 
 @media only screen and (max-width : 414px) {
     body {
@@ -418,7 +389,6 @@ nav.details {
             & .booking, & .noBookings {
                 background: #fff;
                 border-bottom: 1px solid menuBorder;
-                padding: 10px;
 
                 table {
                     width: 100%;

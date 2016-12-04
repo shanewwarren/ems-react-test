@@ -29,14 +29,6 @@ class Home extends Component {
             );
         }
 
-        let overlay = null;
-        if (state.addToggle) {
-            // overlay = (
-            //     <Portal portalId="overlay" className='overlay'>
-            //         <Add onClose={state.toggleAdd} onSubmit={state.addBooking} />
-            //     </Portal>
-            // );
-        }
 
         return (
             <div className='container'>
@@ -48,8 +40,6 @@ class Home extends Component {
 
                     <a onClick={state.setNow} className='link-button'>Now</a>
                 </div>
-
-                { overlay }
             </div>
         );
     }

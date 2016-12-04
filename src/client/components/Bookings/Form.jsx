@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
+import { connect } from 'mobx-connect';
 import {observable} from 'mobx';
 
 import classNames from 'classnames';
 import Moment from 'moment';
 
 import { Link } from 'react-router';
-import { formatDay, formatTime } from '../../utils/dateHelpers';
+import { formatDay, formatTime, combineDateAndTime } from '../../utils/dateHelpers';
 
 import TextField from '../Controls/TextField';
 import DatePicker from '../Controls/DatePicker';
 import TimePicker from '../Controls/TimePicker';
+import Flash from '../Controls/Flash';
 import Joi from 'joi-browser';
+import { browserHistory } from 'react-router';
 
 const FormHelper = require('../../utils/Form').default;
 
-@observer
+@connect
 class Form extends Component {
 
     static propTypes: {
@@ -32,10 +34,10 @@ class Form extends Component {
             validations: {
                 roomName: Joi.string().required(),
                 eventName: Joi.string().required(),
-                startDate: Joi.object().required(),
-                startTime: Joi.object().required(),
-                endDate: Joi.object().required(),
-                endTime: Joi.object().required()
+                startDate: Joi.date().required(),
+                startTime: Joi.date().required(),
+                endDate: Joi.date().required(),
+                endTime: Joi.date().required()
             },
             defaults: {
                 startDate: {},
@@ -46,7 +48,7 @@ class Form extends Component {
             submitAction: this.onSubmit.bind(this)
         };
 
-        if (props.id) {
+        if (this.props.id) {
             options.loadAction = this.loadState.bind(this);
             options.mapState = this.mapState.bind(this);
         } else {
@@ -55,10 +57,8 @@ class Form extends Component {
         }
 
         this.form.initialize(options);
-        this.form.load()
+        this.form.load();
     }
-
-
 
     loadState() {
 
@@ -90,36 +90,73 @@ class Form extends Component {
 
         const { booking, id } = this.props;
 
-        if (this.form.valid) {
-
-            if (id) {
-                booking.updateBooking(id, form);
-            } else {
-                booking.createBooking(form);
-            }
+        if (!this.form.state.valid) {
+            return
         }
+
+        const payload = {
+            roomName: form.roomName,
+            eventName: form.eventName
+        };
+
+        payload.start = combineDateAndTime(form.startDate, form.startTime);
+        payload.end = combineDateAndTime(form.endDate, form.endTime);
+
+        const promise = new Promise((resolve, reject) => {
+
+            try {
+                if (id) booking.updateBooking(id, payload);
+                else booking.createBooking(payload);
+
+                return resolve();
+            }
+            catch (err) {
+
+                return reject(err);
+            }
+        });
+
+        return promise.then(() => {
+
+            const link = this.getCancelLink();
+            return browserHistory.push(link);
+        })
+
+    }
+
+    getCancelLink() {
+
+        const { id } = this.props;
+
+        return id ? `/bookings/${id}` : '/';
     }
 
     render() {
 
-        const { onClose, onSubmit } = this.props;
+        const { id } = this.props;
 
         const submitClasses = classNames('done', {
             'disabled': !this.form.state.valid
         });
 
+        let errorFlash = null;
+        if (this.form.state.formError) {
+            errorFlash =  <Flash status="error" message={this.form.state.formError} />;
+        }
+
+        console.log('render');
         return (
                 <div>
                     <nav className='details'>
                         <ul>
-                            <li className='cancel'><Link className='header-link' to="/">Cancel</Link></li>
+                            <li className='cancel'><Link className='header-link' to={this.getCancelLink()}>Cancel</Link></li>
                             <li className={submitClasses} onClick={this.form.submit}><a>Done</a></li>
-                            <li className='title'>Create Booking</li>
+                            <li className='title'>{ id ? 'Update Booking' : 'Create Booking'}</li>
                         </ul>
                     </nav>
                     <main className='bookingForm'>
                         <form className='column'>
-
+                            {errorFlash}
                             <div className='rowSpace'>
                                 <TextField  {...this.form.fieldProps('eventName')}
                                         inputType='text'

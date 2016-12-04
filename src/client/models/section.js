@@ -12,11 +12,11 @@ export default class Section {
     constructor(start, end) {
 
         if (start) {
-            this.start = Moment.utc(start);
+            this.start = Moment(start);
         }
 
         if (end) {
-            this.end = Moment.utc(end);
+            this.end = Moment(end);
         }
     }
 

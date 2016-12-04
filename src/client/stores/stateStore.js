@@ -10,7 +10,7 @@ export default class StateStore {
     @observable calendarToggle = false;
     @observable addToggle = false;
 
-    @observable currentMoment = Moment.utc();
+    @observable currentMoment = Moment();
 
     @computed get currentDate() {
         return this.currentMoment.toDate();
@@ -36,7 +36,7 @@ export default class StateStore {
 
     _setDate(date) {
 
-        this.currentMoment = Moment.utc(date);
+        this.currentMoment = Moment(date);
     }
 
     _setNow() {

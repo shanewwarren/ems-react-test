@@ -61,7 +61,8 @@ class DatePicker extends Component {
         const inputStyle = {
             padding: '12px',
             fontSize: '1em',
-            outline: '0'
+            outline: '0',
+            border: '1px solid #ddd'
         };
 
         const textFieldStyle = {
@@ -74,13 +75,16 @@ class DatePicker extends Component {
             color: 'darkgray'
         };
 
-
+        const dialogContainerStyle = {
+            top: '-10%'
+        }
         return (
 
             <MuiTheme>
                 <div className={inputStyles}>
                     <label htmlFor={label}>{placeholder}</label>
                     <MuiDatePicker textFieldStyle={textFieldStyle}
+                                dialogContainerStyle={dialogContainerStyle}
                                 hintStyle={hintStyle}
                                 formatDate={formatDate}
                                 inputStyle={inputStyle}

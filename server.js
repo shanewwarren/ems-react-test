@@ -8,7 +8,7 @@ const server = new WebpackDevServer(Webpack(config), {
     historyApiFallback: true
 });
 
-server.listen(3000, 'localhost', (err, result) => {
+server.listen(3000, '192.168.1.3', (err, result) => {
 
     if (err) {
         console.log(err);

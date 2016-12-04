@@ -37,11 +37,13 @@ class Bookings extends Component {
 
     componentDidUpdate(prevProps, prevState) {
 
-        if (this.state.index >= 0 && (this.state.index !== prevState.index)) {
+        if (this.state.index >= 0 ) {
 
+            const rootNode = ReactDOM.findDOMNode(this);
             const domNode = ReactDOM.findDOMNode(this.activeSection);
+
             domNode.scrollIntoView({
-                block: "end",
+                block: "start",
                 behavior: "smooth"
             });
         }

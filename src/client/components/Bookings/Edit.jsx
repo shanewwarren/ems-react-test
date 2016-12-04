@@ -16,7 +16,7 @@ class Edit extends Component {
         const { params, stores } = this.props;
 
         return (
-            <Form id={parseInt(params.bookingId)}
+            <Form id={params.bookingId}
                   booking={stores.booking} />
         );
     }

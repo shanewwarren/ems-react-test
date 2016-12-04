@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 import {observable} from 'mobx';
+import { browserHistory } from 'react-router';
 
 class BookingItem extends Component {
 
-    static prop
+    constructor() {
+        super();
+
+
+        this._handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+
+        const { booking } = this.props;
+
+        browserHistory.push(`/bookings/${booking.id}`);
+    }
+
 
     render() {
 
         const { booking } = this.props;
-
         return (
-            <div className='booking'>
+            <div className='booking'  onTouchTap={this._handleClick} onClick={this._handleClick}>
                 <table>
                     <tbody>
                         <tr>

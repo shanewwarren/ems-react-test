@@ -7,8 +7,8 @@ import Form from './Form';
 @inject('stores') @observer
 class Add extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
     }
 
     render() {
@@ -16,7 +16,7 @@ class Add extends Component {
         const { stores }  = this.props;
 
         return (
-            <Form onSubmit={stores.bookings.createBooking}/>
+            <Form booking={stores.booking}/>
         );
     }
 };

@@ -1,78 +1,56 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
-import classNames from 'classnames';
-import Moment from 'moment';
+import { observer, inject } from 'mobx-react';
+import {observable} from 'mobx';
 
+import { Link } from 'react-router';
 
-
-import {deepOrange500} from 'material-ui/styles/colors';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-
-import DatePicker from 'material-ui/DatePicker';
-
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500,
-  },
-});
-
-
-@observer
+@inject('stores') @observer
 class Show extends Component {
 
-    static propTypes: {
-        onSubmit: React.PropTypes.func.isRequired,
-        onClose: React.PropTypes.func.isRequired
-    }
-
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            roomName: '',
-            eventName: '',
-            startTime: Moment.utc(),
-            endTime: Moment.utc()
+            loaded: false
         };
+    }
+
+    componentDidMount() {
+
+        const { params, stores } = this.props;
+
+        stores.booking.getBooking(params.bookingId);
+
+        this.setState({
+            loaded: true
+        });
     }
 
     render() {
 
-        const { onClose, onSubmit } = this.props;
+        const { booking } = this.props.stores;
+        const { params }= this.props;
+
+        if (!this.state.loaded) {
+            return false;
+        }
+
+        const current = booking.currentBooking;
 
         return (
-            <MuiThemeProvider muiTheme={muiTheme}>
-                <div className='dialog'>
-                    <div className='dialog-header'>
-                        <h2 className='dialog-title'>Book an Event</h2>
-                        <i onClick={onClose}  className="close fa fa-times" aria-hidden="true"></i>
-                    </div>
-                    <div className='dialog-body'>
-                        <form>
-
-                            <input onChange={(evt) => { this.setState({ eventName: evt.target.value }); }}
-                                    value={this.state.eventName}
-                                    type='text'
-                                    placeholder='Event name' />
-
-                            <input onChange={(evt) => { this.setState({ roomName: evt.target.value }); }}
-                                    value={this.state.roomName}
-                                    type='text'
-                                    placeholder='Room name' />
-
-                            <DatePicker hintText="Portrait Dialog" />
-
-                            <input type='time'
-                                    placeholder='Event name' />
-
-                        </form>
-                        <a onClick={onSubmit} className='link-button'>Create</a>
-                    </div>
+                <div>
+                    <nav className='details'>
+                        <ul>
+                            <li className='cancel'><Link className='header-link' to="/">&lt; Bookings</Link></li>
+                            <li className='edit'><Link className='header-link' to={`/bookings/${current.id}/edit`}>Edit</Link></li>
+                        </ul>
+                    </nav>
+                    <main className='bookingShow'>
+                        <h1>{current.eventName}</h1>
+                        <p className='secondary'>{current.roomName}</p>
+                        <div>{current.startFormat} - {current.endFormat} ({current.durationFormat})</div>
+                    </main>
                 </div>
-            </MuiThemeProvider>
         );
     }
 };

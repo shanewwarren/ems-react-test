@@ -57,7 +57,8 @@ class TimePicker extends Component {
         const inputStyle = {
             padding: '12px',
             fontSize: '1em',
-            outline: '0'
+            outline: '0',
+            border: '1px solid #ddd'
         };
 
         const textFieldStyle = {
@@ -70,6 +71,11 @@ class TimePicker extends Component {
             color: 'darkgray'
         };
 
+        const dialogStyle = {
+            paddingTop: '0',
+             top: '-5%'
+        }
+
         return (
 
             <MuiTheme>
@@ -77,6 +83,7 @@ class TimePicker extends Component {
                     <label htmlFor={label}>{placeholder}</label>
                     <MuiTimePicker
                         textFieldStyle={textFieldStyle}
+                        dialogStyle={dialogStyle}
                         hintStyle={hintStyle}
                         inputStyle={inputStyle}
                         underlineShow={false}

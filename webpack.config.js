@@ -5,14 +5,14 @@ module.exports = {
     devtool: 'eval',
     entry: [
         'react-hot-loader/patch',
-        'webpack-dev-server/client?http://localhost:3000',
+        'webpack-dev-server/client?http://192.168.1.3:3000',
         'webpack/hot/only-dev-server',
         './src/client/index'
     ],
     output: {
-        path: Path.join(__dirname, 'dist'),
+        path: Path.join(__dirname, 'build'),
         filename: 'bundle.js',
-        publicPath: '/static/'
+        publicPath: '/build/'
     },
     plugins: [
         new Webpack.HotModuleReplacementPlugin()

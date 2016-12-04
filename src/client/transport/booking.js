@@ -27,6 +27,12 @@ export function getBookings() {
 
 export function getBooking(id) {
 
+
+    let actualId = parseInt(id);
+    if (!Number.isInteger(actualId)) {
+        actualId = id;
+    }
+
     const key = internals.getKey(id);
     return Store.get(key);
 
