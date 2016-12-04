@@ -30,7 +30,6 @@ class TimePicker extends Component {
         let time = data;
         if (event && event.target && event.target.value) {
             // mobile fallback
-            console.log(event.target.value);
             time = Moment(event.target.value, 'HH:mm').toDate();
         }
 
